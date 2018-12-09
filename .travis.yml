@@ -18,16 +18,16 @@ before_install:
 language: c
 
 script:
+- ls -la
+- pwd
 
 # Linux Build Support
-- if [[ "$TRAVIS_OS_NAME" == "linux" && "$BUILD_MINGW" == false  ]]; then ./configure --disable-gtk --disable-gst --launch --launch-jobs=0 fi
+- if [[ "$TRAVIS_OS_NAME" == "linux" ] && [ "$BUILD_MINGW" == false  ]]; then ./configure --disable-gtk --disable-gst --launch --launch-jobs=0 fi
 
 # MinGW Build Support
-if [[  "$BUILD_MINGW" == true && ! -d "$HOME/toolchains" ]]; then ls -la fi
-if [[  "$BUILD_MINGW" == true && ! -d "$HOME/toolchains" ]]; then ./scripts/mingw-w64-build x86_64 && ./scripts/mingw-w64-build x86_64.clean fi
-if [[  "$BUILD_MINGW" == true ]]; then export $HOME/toolchains/mingw-w64-5.0.2-gcc-7.1.0/mingw-w64-x86_64/bin;$PATH fi
-if [[  "$BUILD_MINGW" == true ]]; then echo $PATH fi
-
+- if [[  "$BUILD_MINGW" == true ] && [! -d "$HOME/toolchains" ]]; then ./scripts/mingw-w64-build x86_64 && ./scripts/mingw-w64-build x86_64.clean fi
+- if [[  "$BUILD_MINGW" == true ]]; then export $HOME/toolchains/mingw-w64-5.0.2-gcc-7.1.0/mingw-w64-x86_64/bin;$PATH fi
+- if [[  "$BUILD_MINGW" == true ]]; then echo $PATH fi
 
 cache:
   directories:
