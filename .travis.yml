@@ -9,6 +9,9 @@ matrix:
     - os: linux
       dist: xenial
       env: BUILD_MINGW=true
+    - os: osx
+      osx_image: xcode10.1
+      nv: BUILD_MINGW=false
 
 before_install:
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update -qq ; fi
@@ -26,7 +29,9 @@ script:
 # MinGW Build Support
 - if [[ "$BUILD_MINGW" == true && ! -d "$HOME/toolchains/mingw-w64-5.0.2-gcc-7.1.0" ]]; then ./scripts/mingw-w64-build x86_64 && ./scripts/mingw-w64-build x86_64.clean ; fi
 - if [[ "$BUILD_MINGW" == true ]]; then export PATH=$HOME/toolchains/mingw-w64-5.0.2-gcc-7.1.0/mingw-w64-x86_64/bin:$PATH ; fi
-- if [[ "$BUILD_MINGW" == true ]]; then echo $PATH ; fi
+- if [[ "$BUILD_MINGW" == true  ]]; then wget https://www.nasm.us/pub/nasm/releasebuilds/2.14/nasm-2.14.tar.gz ; fi
+- if [[ "$BUILD_MINGW" == true  ]]; then tar xvf nasm-2.14.tar.gz ; fi
+- if [[ "$BUILD_MINGW" == true  ]]; then  cd nasm-2.14/ && ./configure && make && make install ; fi
 - if [[ "$BUILD_MINGW" == true  ]]; then ./configure --cross=x86_64-w64-mingw32 --enable-nvenc --enable-qsv --enable-vce --launch --launch-jobs=0 ; fi
 
 cache:
