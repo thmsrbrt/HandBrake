@@ -5,6 +5,10 @@ matrix:
   include:
     - os: linux
       dist: xenial
+      env: BUILD_MINGW=false
+    - os: linux
+      dist: xenial
+      env: BUILD_MINGW=true
 
 before_install:
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update -qq ; fi
@@ -14,4 +18,14 @@ before_install:
 language: c
 
 script:
-- ./configure --disable-gtk --disable-gst --launch --launch-jobs=0
+
+# Linux Build Support
+- if [[ "$TRAVIS_OS_NAME" == "linux" && "$BUILD_MINGW" == false  ]]; then ./configure --disable-gtk --disable-gst --launch --launch-jobs=0 fi
+
+# MinGW Build Support
+if [[  "$BUILD_MINGW" == true && ! -d "$HOME/toolchains" ]]; then ls -la fi
+if [[  "$BUILD_MINGW" == true && ! -d "$HOME/toolchains" ]]; then ./scripts/mingw-w64-build x86_64 && ./scripts/mingw-w64-build x86_64.clean fi
+
+cache:
+  directories:
+  - $HOME/toolchains
