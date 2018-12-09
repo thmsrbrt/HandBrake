@@ -20,6 +20,8 @@ language: c
 script:
 - ls -la
 - pwd
+- echo $HOME
+- ls -la $HOME
 
 # Linux Build Support
 - if [[ "$TRAVIS_OS_NAME" == "linux" && "$BUILD_MINGW" == false  ]]; then ./configure --disable-gtk --disable-gst --launch --launch-jobs=0 fi
