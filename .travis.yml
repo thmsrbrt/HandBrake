@@ -38,6 +38,7 @@ script:
 - if [[ "$TRAVIS_OS_NAME" == "osx" && -d "$HOME/toolchains/mac" ]]; then sudo ./scripts/mac-toolchain-build ~/toolchains/mac  ; fi
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then curl -O https://www.nasm.us/pub/nasm/releasebuilds/2.14/nasm-2.14.tar.gz ; fi
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then tar xvf nasm-2.14.tar.gz && cd nasm-2.14/ && ./configure && make && cd ..  ; fi
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then pwd ; fi
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then export PATH=/home/travis/build/HandBrake/HandBrake/nasm-2.14/:$HOME/toolchains/mac/bin:$PATH ; fi
 - echo $PATH
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./configure --launch --launch-jobs=0 ; fi
