@@ -32,7 +32,7 @@ script:
 - if [[ "$BUILD_MINGW" == true ]]; then tar xvf nasm-2.14.tar.gz && cd nasm-2.14/ && ./configure && make && cd ..  ; fi
 - if [[ "$BUILD_MINGW" == true ]]; then export PATH=/home/travis/build/HandBrake/HandBrake/nasm-2.14/:$HOME/toolchains/mingw-w64-5.0.2-gcc-7.1.0/mingw-w64-x86_64/bin:$PATH ; fi
 - echo $PATH
-- if [[ "$BUILD_MINGW" == true ]]; then ./configure --cross=x86_64-w64-mingw32 --enable-nvenc --enable-qsv --enable-vce --launch --launch-jobs=0 ; fi
+- if [[ "$BUILD_MINGW" == true ]]; then ./configure --cross=x86_64-w64-mingw32 --enable-nvenc --enable-qsv --enable-vce  && cd build && make -j 2 ; fi
 
 # Macos Build Support
 - if [[ "$TRAVIS_OS_NAME" == "osx" && -d "$HOME/toolchains/mac" ]]; then sudo ./scripts/mac-toolchain-build ~/toolchains/mac  ; fi
@@ -41,7 +41,7 @@ script:
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then pwd ; fi
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then export PATH=/Users/travis/build/HandBrake/HandBrake/nasm-2.14/:$HOME/toolchains/mac/bin:$PATH ; fi
 - echo $PATH
-- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./configure --launch --launch-jobs=0 ; fi
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./configure && cd build && make -j 2 ; fi
 
 
 cache:
