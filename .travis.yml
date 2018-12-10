@@ -15,8 +15,8 @@ matrix:
 
 before_install:
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update -qq ; fi
-- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install -qq autoconf automake build-essential cmake git libass-dev libbz2-dev libfontconfig1-dev libfreetype6-dev libfribidi-dev libharfbuzz-dev libjansson-dev liblzma-dev libmp3lame-dev libogg-dev libopus-dev libsamplerate-dev libspeex-dev libtheora-dev libtool libtool-bin libvorbis-dev libx264-dev libxml2-dev m4 make nasm patch pkg-config python tar yasm zlib1g-dev  ; fi
-- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install -qq intltool libappindicator-dev libdbus-glib-1-dev libglib2.0-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libgtk-3-dev libgudev-1.0-dev libnotify-dev libwebkitgtk-3.0-dev  ; fi
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install -qq autoconf automake build-essential cmake git libass-dev libbz2-dev libfontconfig1-dev libfreetype6-dev libfribidi-dev libharfbuzz-dev libjansson-dev liblzma-dev libmp3lame-dev libogg-dev libopus-dev libsamplerate-dev libspeex-dev libtheora-dev libtool libtool-bin libvorbis-dev libx264-dev libxml2-dev m4 make patch pkg-config python tar yasm zlib1g-dev  ; fi
+- if [[ "$TRAVIS_OS_NAME" == "linux" && "$BUILD_MINGW" == false ]]; then sudo apt-get install -qq intltool libappindicator-dev libdbus-glib-1-dev libglib2.0-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libgtk-3-dev libgudev-1.0-dev libnotify-dev libwebkitgtk-3.0-dev nasm  ; fi
 - if [[ "$BUILD_MINGW" == true ]]; then sudo apt-get install -qq pax ; fi
 
 language: c
@@ -27,8 +27,8 @@ script:
 - if [[ "$TRAVIS_OS_NAME" == "linux" && "$BUILD_MINGW" == false  ]]; then ./configure --disable-gtk --disable-gst --launch --launch-jobs=0 ; fi
 
 # MinGW Build Support
-- if [[ "$BUILD_MINGW" == true && ! -d ~/toolchains/mingw-w64-5.0.2-gcc-7.1.0 ]]; then ./scripts/mingw-w64-build x86_64  ; fi
-- if [[ "$BUILD_MINGW" == true && ! -d ~/toolchains/mingw-w64-5.0.2-gcc-7.1.0 ]]; then ./scripts/mingw-w64-build x86_64.clean  ; fi
+- if [[ "$BUILD_MINGW" == true && ! -d "~/toolchains/mingw-w64-5.0.2-gcc-7.1.0" ]]; then ./scripts/mingw-w64-build x86_64  ; fi
+- if [[ "$BUILD_MINGW" == true && ! -d "~/toolchains/mingw-w64-5.0.2-gcc-7.1.0" ]]; then ./scripts/mingw-w64-build x86_64.clean  ; fi
 - if [[ "$BUILD_MINGW" == true ]]; then wget https://www.nasm.us/pub/nasm/releasebuilds/2.14/nasm-2.14.tar.gz ; fi
 - if [[ "$BUILD_MINGW" == true ]]; then tar xvf nasm-2.14.tar.gz ; fi
 - if [[ "$BUILD_MINGW" == true ]]; then cd nasm-2.14/ && ./configure && make ; fi
