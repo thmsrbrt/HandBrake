@@ -24,7 +24,7 @@ msgid ""
 "\n"
 "The subtitle will be part of the video and can not be disabled."
 msgstr ""
-"Incruste le sous-titre dans la vidéo.\n"
+"Incruster le sous-titre dans la vidéo.\n"
 "\n"
 "Le sous-titre fera partie intégrante de la vidéo et ne pourra pas être désactivé."
 
@@ -44,7 +44,7 @@ msgid ""
 msgstr ""
 "Désigne la piste de sous-titres qui sera affichée par défaut.\n"
 "\n"
-"La plupart des lecteurs afficheront automatiquement cette\n"
+"La plupart des lecteurs afficheront automatiquement\n"
 "piste de sous-titres à chaque fois que la vidéo sera lue.\n"
 "\n"
 "C'est utile pour créer une piste dont l'affichage est \"imposé\"."
@@ -166,7 +166,7 @@ msgstr "<b>Liste des préréglages</b>"
 
 #: ../src/ghb.m4.h:49
 msgid "About HandBrake"
-msgstr "A propos d' HandBrake"
+msgstr "A propos d'!çHandBrake"
 
 #: ../src/ghb.m4.h:50
 msgid ""
